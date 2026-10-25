@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Diana — Mi Futura Esposa</title>
+  <meta name="description" content="Una página romántica y de motos dedicada a Diana, mi futura esposa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Floating particles / hearts background -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- Navegación fija (siempre visible) -->
+  <nav class="nav" id="mainNav">
+    <a href="#" class="nav__brand">Diana <span>&</span> Yo</a>
+    <ul class="nav__links">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#motos">Motos</a></li>
+      <li><a href="#promesa">Promesa</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Intro overlay with romantic messages -->
+  <section id="intro" class="intro">
+    <div class="intro__bg"></div>
+    <div class="intro__content">
+      <p class="intro__eyebrow">Para la mujer de mi vida</p>
+      <h1 class="intro__title">
+        <span class="intro__title-line">Diana</span>
+        <span class="intro__title-sub">mi futura esposa</span>
+      </h1>
+      <div class="intro__messages" id="introMessages" aria-live="polite"></div>
+      <button id="enterBtn" class="intro__btn" type="button">
+        <span>Entrar a nuestro viaje</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="intro__scroll-hint">
+      <span>Desliza</span>
+      <div class="intro__mouse"></div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="hero__text">
+        <p class="hero__kicker">Un viaje que apenas comienza</p>
+        <h2 class="hero__title">Cada kilómetro a tu lado<br/>es mi destino favorito.</h2>
+        <p class="hero__lead">Esta página es un pequeño homenaje a ti, Diana: a tu sonrisa, a tu fuerza y al futuro que construiremos juntos, sobre dos ruedas y de la mano.</p>
+        <div class="hero__cta">
+          <a href="#galeria" class="btn btn--primary">Ver nuestras fotos</a>
+          <a href="#promesa" class="btn btn--ghost">Mi promesa</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="bike">
+          <svg class="bike__svg" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="bikeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ff4d6d"/>
+                <stop offset="100%" stop-color="#ff8fa3"/>
+              </linearGradient>
+              <linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="transparent"/>
+                <stop offset="50%" stop-color="#ff4d6d"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <!-- Road -->
+            <rect x="0" y="195" width="420" height="4" fill="url(#roadGrad)" opacity="0.6"/>
+            <!-- Wheels -->
+            <circle cx="95" cy="160" r="42" fill="none" stroke="#1a1a1a" stroke-width="8"/>
+            <circle cx="95" cy="160" r="28" fill="none" stroke="#333" stroke-width="2"/>
+            <circle cx="95" cy="160" r="6" fill="#ff4d6d"/>
+            <circle cx="320" cy="160" r="42" fill="none" stroke="#1a1a1a" stroke-width="8"/>
+            <circle cx="320" cy="160" r="28" fill="none" stroke="#333" stroke-width="2"/>
+            <circle cx="320" cy="160" r="6" fill="#ff4d6d"/>
+            <!-- Frame -->
+            <path d="M95 160 L150 110 L230 110 L280 160 L320 160" fill="none" stroke="url(#bikeGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M150 110 L170 70 L250 70 L270 110" fill="none" stroke="url(#bikeGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Seat -->
+            <path d="M160 108 L210 100 L240 108" fill="none" stroke="#222" stroke-width="8" stroke-linecap="round"/>
+            <!-- Handlebar -->
+            <path d="M250 70 L290 60" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="292" cy="59" r="4" fill="#ff4d6d"/>
+            <!-- Headlight -->
+            <circle cx="275" cy="105" r="7" fill="#ffd166"/>
+            <!-- Rider silhouette hint -->
+            <circle cx="200" cy="55" r="14" fill="#ff4d6d" opacity="0.9"/>
+            <path d="M200 69 L195 100 L225 100" fill="none" stroke="#ff4d6d" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="bike__glow"></div>
+        </div>
+        <div class="hero__ring"></div>
+      </div>
+    </div>
+    <div class="hero__road">
+      <div class="hero__road-line"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Historia -->
+    <section id="historia" class="section section--dark">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__kicker">Nuestra historia</p>
+          <h3 class="section__title">Un camino que elegimos recorrer juntos</h3>
+        </div>
+        <div class="timeline">
+          <div class="timeline__item" data-reveal>
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">El encuentro</span>
+              <h4>El día en que todo cambió</h4>
+              <p>Conocerte fue como encender el motor por primera vez: vibración, emoción y la certeza de que el viaje valía la pena.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-reveal>
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">Los paseos</span>
+              <h4>Rutas, viento y tu mano en la mía</h4>
+              <p>Cada salida en moto contigo es un recuerdo que guardo con cariño. No importa el destino, importa que estés tú.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-reveal>
+            <div class="timeline__dot"></div>
+            <div class="timeline__card">
+              <span class="timeline__date">El futuro</span>
+              <h4>Hacia el altar, juntos</h4>
+              <p>Diana, mi futura esposa: quiero que cada amanecer sea un nuevo kilómetro a tu lado, hasta que las ruedas dejen de girar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="section section--gallery">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__kicker">Nuestros momentos</p>
+          <h3 class="section__title">Cuatro fotos, mil recuerdos</h3>
+          <p class="section__sub">Haz clic en cualquier imagen para verla en grande.</p>
+        </div>
+        <div class="gallery" id="gallery">
+          <figure class="gallery__item" data-reveal>
+            <img src="fotos/Foto 1.jpeg" alt="Foto 1 de Diana" loading="lazy" />
+            <figcaption>Mi razón de sonreír</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="fotos/foto 2.jpeg" alt="Foto 2 de Diana" loading="lazy" />
+            <figcaption>Tu mirada, mi destino</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="fotos/Foto 3.jpeg" alt="Foto 3 de Diana" loading="lazy" />
+            <figcaption>Belleza que enamora</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="fotos/Foto 4.jpeg" alt="Foto 4 de Diana" loading="lazy" />
+            <figcaption>Mi futura esposa</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Motos -->
+    <section id="motos" class="section section--bike">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__kicker">Pasión sobre dos ruedas</p>
+          <h3 class="section__title">El amor también se vive en moto</h3>
+        </div>
+        <div class="bike-features">
+          <div class="bike-features__card" data-reveal>
+            <div class="bike-features__icon">🏍️</div>
+            <h4>Velocidad y libertad</h4>
+            <p>Como nuestro amor: sin límites, sin miedo, siempre hacia adelante.</p>
+          </div>
+          <div class="bike-features__card" data-reveal>
+            <div class="bike-features__icon">❤️</div>
+            <h4>Seguridad y cuidado</h4>
+            <p>Siempre con casco, siempre contigo: mi prioridad es tu bienestar.</p>
+          </div>
+          <div class="bike-features__card" data-reveal>
+            <div class="bike-features__icon">🌅</div>
+            <h4>Amaneceres en la ruta</h4>
+            <p>Los mejores paisajes son los que vemos juntos desde el asiento trasero.</p>
+          </div>
+          <div class="bike-features__card" data-reveal>
+            <div class="bike-features__icon">💍</div>
+            <h4>Hacia el altar</h4>
+            <p>Pronto serás mi esposa; juntos escribiremos la ruta más hermosa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promesa -->
+    <section id="promesa" class="section section--promise">
+      <div class="container container--narrow">
+        <div class="promise">
+          <p class="promise__quote">“Diana, prometo amarte en cada curva, cuidarte en cada kilómetro y elegirte todos los días de mi vida.”</p>
+          <p class="promise__author">— Con todo mi amor, tu futuro esposo</p>
+          <div class="promise__heart">❤</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Hecho con amor para <strong>Diana</strong> · © <span id="year"></span></p>
+    <p class="footer__small">Porque el amor verdadero no tiene límite de velocidad.</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">×</button>
+    <img id="lightboxImg" src="" alt="" />
+    <p id="lightboxCaption" class="lightbox__caption"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
