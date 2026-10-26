@@ -210,8 +210,8 @@
 
   /* ---------- Música: El mímico básico → La chica interesada ---------- */
   const tracks = [
-    { src: 'audio/mimico basico.mp4', title: 'El mímico básico' },
-    { src: 'audio/Chica Interesada.mp4', title: 'La chica interesada' },
+    { src: 'audio/mimico-basico.m4a', title: 'El mímico básico' },
+    { src: 'audio/chica-interesada.m4a', title: 'La chica interesada' },
   ];
   const audio = $('#bgMusic');
   const musicPlayer = $('#musicPlayer');
