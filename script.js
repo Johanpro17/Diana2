@@ -209,9 +209,19 @@
   if (skipBtn) skipBtn.addEventListener('click', enterSite);
 
   /* ---------- Música: El mímico básico → La chica interesada ---------- */
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slowNetwork = !!(conn && (conn.saveData || /(^|-)[23]g$/.test(conn.effectiveType || '')));
   const tracks = [
-    { src: 'audio/mimico-basico.m4a', title: 'El mímico básico' },
-    { src: 'audio/chica-interesada.m4a', title: 'La chica interesada' },
+    {
+      src: 'audio/originales/mimico basico.mp4',
+      light: 'audio/mimico-basico.m4a',
+      title: 'El mímico básico',
+    },
+    {
+      src: 'audio/originales/Chica Interesada.mp4',
+      light: 'audio/chica-interesada.m4a',
+      title: 'La chica interesada',
+    },
   ];
   const audio = $('#bgMusic');
   const musicPlayer = $('#musicPlayer');
@@ -221,6 +231,11 @@
   let trackIndex = 0;
   let musicLoaded = false;
   let musicStarted = false;
+  let usingLight = slowNetwork;
+
+  function trackSource(track) {
+    return usingLight && track.light ? track.light : track.src;
+  }
 
   function setPlayingUI(playing) {
     if (musicPlayer) musicPlayer.classList.toggle('playing', playing);
@@ -241,10 +256,11 @@
     }
   }
 
-  function loadTrack(index, autoplay) {
+  function loadTrack(index, autoplay, keepQuality) {
     if (!audio || !tracks.length) return;
     trackIndex = (index + tracks.length) % tracks.length;
-    audio.src = tracks[trackIndex].src;
+    if (!keepQuality) usingLight = slowNetwork;
+    audio.src = trackSource(tracks[trackIndex]);
     audio.volume = 0.65;
     musicLoaded = true;
     if (musicTrack) musicTrack.textContent = tracks[trackIndex].title;
@@ -262,6 +278,13 @@
     audio.addEventListener('pause', () => setPlayingUI(false));
     audio.addEventListener('ended', () => loadTrack(trackIndex + 1, true));
     audio.addEventListener('error', () => {
+      const track = tracks[trackIndex];
+      // Si la canción original falla, usa automáticamente la versión ligera.
+      if (track && track.light && !usingLight) {
+        usingLight = true;
+        loadTrack(trackIndex, true, true);
+        return;
+      }
       setPlayingUI(false);
       if (musicTrack && musicLoaded) musicTrack.textContent = 'No se pudo cargar el audio';
     });
