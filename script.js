@@ -202,10 +202,93 @@
       intro.style.display = 'none';
     }, 750);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    startMusicOnce();
   }
 
   if (enterBtn) enterBtn.addEventListener('click', enterSite);
   if (skipBtn) skipBtn.addEventListener('click', enterSite);
+
+  /* ---------- Música: El mímico básico → La chica interesada ---------- */
+  const tracks = [
+    { src: 'audio/mimico basico.mp4', title: 'El mímico básico' },
+    { src: 'audio/Chica Interesada.mp4', title: 'La chica interesada' },
+  ];
+  const audio = $('#bgMusic');
+  const musicPlayer = $('#musicPlayer');
+  const musicToggle = $('#musicToggle');
+  const musicNext = $('#musicNext');
+  const musicTrack = $('#musicTrack');
+  let trackIndex = 0;
+  let musicLoaded = false;
+  let musicStarted = false;
+
+  function setPlayingUI(playing) {
+    if (musicPlayer) musicPlayer.classList.toggle('playing', playing);
+    if (musicToggle) {
+      musicToggle.setAttribute('aria-pressed', String(playing));
+      musicToggle.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
+    }
+  }
+
+  function playMusic() {
+    if (!audio) return;
+    const attempt = audio.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(() => {
+        musicStarted = false;
+        setPlayingUI(false);
+      });
+    }
+  }
+
+  function loadTrack(index, autoplay) {
+    if (!audio || !tracks.length) return;
+    trackIndex = (index + tracks.length) % tracks.length;
+    audio.src = tracks[trackIndex].src;
+    audio.volume = 0.65;
+    musicLoaded = true;
+    if (musicTrack) musicTrack.textContent = tracks[trackIndex].title;
+    if (autoplay) playMusic();
+  }
+
+  function startMusicOnce() {
+    if (musicStarted) return;
+    musicStarted = true;
+    loadTrack(0, true);
+  }
+
+  if (audio) {
+    audio.addEventListener('play', () => setPlayingUI(true));
+    audio.addEventListener('pause', () => setPlayingUI(false));
+    audio.addEventListener('ended', () => loadTrack(trackIndex + 1, true));
+    audio.addEventListener('error', () => {
+      setPlayingUI(false);
+      if (musicTrack && musicLoaded) musicTrack.textContent = 'No se pudo cargar el audio';
+    });
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', () => {
+      if (!musicLoaded) {
+        musicStarted = true;
+        loadTrack(0, true);
+        return;
+      }
+      if (audio.paused) {
+        musicStarted = true;
+        playMusic();
+      } else {
+        audio.pause();
+      }
+    });
+  }
+
+  if (musicNext) {
+    musicNext.addEventListener('click', () => {
+      musicStarted = true;
+      loadTrack(trackIndex + 1, true);
+    });
+  }
 
   /* ---------- Navegación ---------- */
   const nav = $('#mainNav');
@@ -238,6 +321,7 @@
         intro.classList.add('is-hidden');
         document.body.classList.remove('intro-open');
         setTimeout(() => { intro.style.display = 'none'; }, 750);
+        startMusicOnce();
       }
     })
   );

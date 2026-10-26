@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0d12" />
-  <title>Para Diana — Mi Futura Esposa</title>
-  <meta name="description" content="Una página romántica y de motos dedicada a Diana, mi futura esposa." />
+  <title>Diana y JOHAN — Mi Futura Esposa</title>
+  <meta name="description" content="Una página romántica y de motos dedicada a Diana, mi futura esposa, hecha por JOHAN." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet" />
@@ -30,7 +30,7 @@
 
   <!-- Navegación fija (siempre visible) -->
   <nav class="nav" id="mainNav">
-    <a href="#inicio" class="nav__brand" aria-label="Ir al inicio">Diana <span>&</span> Yo</a>
+    <a href="#inicio" class="nav__brand" aria-label="Ir al inicio">Diana <span>y</span> JOHAN</a>
     <ul class="nav__links" id="navLinks">
       <li><a href="#inicio" class="nav__link is-active">Inicio</a></li>
       <li><a href="#historia" class="nav__link">Historia</a></li>
@@ -52,7 +52,8 @@
       <p class="intro__eyebrow">Para la mujer de mi vida</p>
       <h1 class="intro__title">
         <span class="intro__title-line">Diana</span>
-        <span class="intro__title-sub">mi futura esposa</span>
+        <span class="intro__title-sub">y JOHAN</span>
+        <span class="intro__title-note">mi futura esposa</span>
       </h1>
       <div class="intro__messages" id="introMessages" aria-live="polite"></div>
       <div class="intro__actions">
@@ -338,10 +339,24 @@
   </main>
 
   <footer class="footer">
-    <div class="footer__brand">Diana <span>&</span> Yo</div>
+    <div class="footer__brand">Diana <span>y</span> JOHAN</div>
     <p>Hecho con amor para <strong>Diana</strong> · © <span id="year"></span></p>
     <p class="footer__small">Porque el amor verdadero no tiene límite de velocidad.</p>
   </footer>
+
+  <!-- Reproductor de música -->
+  <div class="music-player" id="musicPlayer">
+    <button class="music-player__toggle" id="musicToggle" type="button" aria-label="Reproducir música" aria-pressed="false">
+      <span class="music-player__disc" aria-hidden="true">♪</span>
+    </button>
+    <div class="music-player__meta">
+      <span class="music-player__label">Nuestra música</span>
+      <span class="music-player__track" id="musicTrack">El mímico básico</span>
+    </div>
+    <div class="music-player__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <button class="music-player__next" id="musicNext" type="button" aria-label="Siguiente canción">⏭</button>
+  </div>
+  <audio id="bgMusic" preload="metadata" playsinline></audio>
 
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
 
